@@ -28,7 +28,7 @@ go build
 sudo sed -i 's/AllowTcpForwarding no/AllowTcpForwarding yes/g' /etc/ssh/sshd_config
 echo "AllowTcpForwarding yes" >> /etc/ssh/sshd_config
 service ssh restart
-sudo echo "cd /root/dnstt/dnstt-server && screen -dms dns ./dnstt-server -udp :53 -privkey-file server.key $ip 127.0.0.1:443" > /bin/slow
+sudo echo "cd /root/dnstt/dnstt-server && screen -dms dns ./dnstt-server -udp :53 -privkey-file server.key $ip 127.0.0.1:22" > /bin/slow
 sudo chmod +x /bin/slow
 clear
 cat /root/dnstt/dnstt-server/server.pub
