@@ -1,5 +1,6 @@
 ip=br.dnstt.xyz
 function goinst(){
+clear
 echo -e "Deseja instalar a linguagem GO Lang"
 echo -e "Continuar?"
 while [[ ${yesno} != @(s|S|y|Y|n|N) ]]; do
