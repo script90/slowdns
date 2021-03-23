@@ -23,9 +23,6 @@ rm go1.15.linux-amd64.tar.gz
 source /root/.bashrc
 fi
 fi
-echo -e "\033[1;31mPRESSIONE ENTER PARA CONTINUAR\033[0m"
-read -p " "
-exit 0
 }
 goinst
 cd /root
