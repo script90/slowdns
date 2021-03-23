@@ -10,22 +10,17 @@ done
 if [[ ${yesno} = @(s|S|y|Y) ]]; then
 echo -e "Instalando..."
 cd
-rm -rf /usr/local/go 1> /dev/null 2> /dev/null
-wget https://golang.org/dl/go1.15.linux-amd64.tar.gz 1> /dev/null 2> /dev/null
-tar -C /usr/local -xzf go1.15.linux-amd64.tar.gz
-if cat /root/.bashrc | grep GOROOT; then
-echo -e "Já existe um GoROOT - Skipping"
-else
-sed -i '$a export GOROOT=/usr/local/go' /root/.bashrc
-sed -i '$a export GOPATH=$HOME/go' /root/.bashrc
-sed -i '$a export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' /root/.bashrc
-rm go1.15.linux-amd64.tar.gz
+wget https://golang.org/dl/go1.16.2.linux-amd64.tar.gz 1> /dev/null 2> /dev/null
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.16.2.linux-amd64.tar.gz
+export GOROOT=/usr/local/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+rm /root/go1.16.2.linux-amd64.tar.gz
 source /root/.bashrc
-fi
 fi
 }
 goinst
-cd /root
+cd 
+rm -rf /root/dnstt
 git clone https://www.bamsoftware.com/git/dnstt.git
 cd /root/dnstt/dnstt-server
 go build
