@@ -14,8 +14,7 @@ clear
             [[ -z "$ns" ]] && {
                 echo -e "\nDOMINIO INVALIDO"
                 exit 0
-            }
-  fi          
+            }          
 wget -P $DIR https://raw.githubusercontent.com/script90/slowdns/main/dns-server >/dev/null 2>&1  
 chmod 777 $DIR/dns-server >/dev/null 2>&1
 $DIR/dns-server -gen-key -privkey-file server.key -pubkey-file server.pub
@@ -28,3 +27,4 @@ keypub=$(cat $DIR/server.pub)
 clear
 echo -e "\nCOMANDO TERMUX: ${tmx} ${ns} ${keypub}"
 rm inst
+fi
