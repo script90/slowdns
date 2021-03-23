@@ -1,0 +1,26 @@
+ip=br.dnstt.xyz
+cd
+rm -rf /usr/local/go 1> /dev/null 2> /dev/null
+wget https://golang.org/dl/go1.16.2.linux-amd64.tar.gz
+tar -C /usr/local -xzf go1.16.2.linux-amd64.tar.gz
+if cat /root/.bashrc | grep GOROOT; then
+echo -e "Ja existe um GoROOT - Pulando"
+else
+sed -i '$a export GOROOT=/usr/local/go' /root/.bashrc
+sed -i '$a export GOPATH=$HOME/go' /root/.bashrc
+sed -i '$a export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' /root/.bashrc
+rm go1.16.2.linux-amd64.tar.gz
+source /root/.bashrc
+fi
+cd /root
+git clone https://www.bamsoftware.com/git/dnstt.git
+cd /root/dnstt/dnstt-server
+go build
+./dnstt-server -gen-key -privkey-file server.key -pubkey-file server.pub
+sudo sed -i 's/AllowTcpForwarding no/AllowTcpForwarding yes/g' /etc/ssh/sshd_config
+echo "AllowTcpForwarding yes" >> /etc/ssh/sshd_config
+service ssh restart
+sudo echo "cd /root/dnstt/dnstt-server && screen -dms dns ./dnstt-server -udp :53 -privkey-file server.key $ip 127.0.0.1:443" > /bin/slow
+sudo chmod +x /bin/slow
+clear
+cat /root/dnstt/dnstt-server/server.pub
