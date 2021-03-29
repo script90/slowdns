@@ -29,6 +29,7 @@ ps x | grep 'slow_dns' | grep -v 'grep' || slow' >/etc/verifslow
 	chmod +x /etc/verifslow
 [[ $(crontab -l | grep -c "verifslow") = '0' ]] && (
                 crontab -l 2>/dev/null
+                echo "@reboot /etc/verifslow"
                 echo "* * * * * /etc/verifslow"
             ) | crontab -
 clear
