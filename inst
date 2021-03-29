@@ -20,7 +20,7 @@ chmod 777 $DIR/dns-server >/dev/null 2>&1
 $DIR/dns-server -gen-key -privkey-file $DIR/server.key -pubkey-file $DIR/server.pub
 wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/script90/2.9/master/install/sshd_config > /dev/null 2>&1
 service ssh restart
-sudo echo "cd $DIR && screen -dms dns ./dns-server -udp :53 -privkey-file server.key ${ns} 127.0.0.1:22" > /bin/slow
+sudo echo "cd $DIR && screen -dms slow_dns ./dns-server -udp :53 -privkey-file server.key ${ns} 127.0.0.1:22" > /bin/slow
 sudo chmod +x /bin/slow
 echo '#!/bin/bash
 clear
