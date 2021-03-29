@@ -22,6 +22,11 @@ wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/script90/2.9/mast
 service ssh restart
 sudo echo "cd $DIR && screen -dms dns ./dns-server -udp :53 -privkey-file server.key ${ns} 127.0.0.1:22" > /bin/slow
 sudo chmod +x /bin/slow
+echo '#!/bin/bash
+clear
+#INICIO AUTOMATICO
+ps x | grep 'slow_dns' | grep -v 'grep' || slow' >/etc/verifslow
+	chmod +x /etc/verifslow
 [[ $(crontab -l | grep -c "verifslow") = '0' ]] && (
                 crontab -l 2>/dev/null
                 echo "* * * * * /etc/verifslow"
