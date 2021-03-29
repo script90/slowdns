@@ -5,7 +5,7 @@ clear
   if ps x | grep -w dns-server | grep -v grep 1>/dev/null 2>/dev/null; then 
           screen -r -S "slow_dns" -X quit >/dev/null 2>&1
           screen -wipe > /dev/null 2>&1
-          sed -i '/slow_dns/d' /etc/autostart
+          sed -i '/slow_dns/d' /etc/verifslow
           echo -e "\n${RED}SLOWDNS DESATIVADO !${SCOLOR}"
           sleep 2
   else          
